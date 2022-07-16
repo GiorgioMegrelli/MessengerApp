@@ -13,4 +13,22 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Sign In, Sign Up Pages -->
+    <style name="sign_in_up_edittext_style">
+        <item name="android:background">@drawable/edit_text_border</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/sign_in_up_edittext_height</item>
+        <item name="android:layout_marginStart">@dimen/sign_in_up_edittext_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/sign_in_up_edittext_horizontal_margin</item>
+    </style>
+
+    <style name="sign_in_up_button_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/global_button_default_color</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textSize">@dimen/sign_in_up_button_font_size</item>
+    </style>
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Global -->
+    <dimen name="global_edittext_radius">24dp</dimen>
+    <!-- Sign In, Sign Up Pages -->
+    <dimen name="avatar_image_dimen">200dp</dimen>
+    <dimen name="sign_in_up_edittext_height">48dp</dimen>
+    <dimen name="sign_in_up_edittext_horizontal_margin">40dp</dimen>
+    <dimen name="sign_in_up_button_font_size">18sp</dimen>
+    <!-- Sign In Page -->
+    <dimen name="sign_in_avatar_margin_top">80dp</dimen>
+    <dimen name="sing_in_sing_up_margin_bottom">20dp</dimen>
+    <dimen name="sing_in_edittext_margin_top">15dp</dimen>
+    <dimen name="sing_in_sing_in_margin_top">30dp</dimen>
+    <!-- Sign Up Page -->
+    <dimen name="sign_up_avatar_margin_top">70dp</dimen>
+    <dimen name="sign_up_edittext_margin_top_1">30dp</dimen>
+    <dimen name="sign_up_edittext_margin_top_2">15dp</dimen>
+    <dimen name="sign_up_edittext_margin_top_3">20dp</dimen>
+    <dimen name="sing_up_sing_up_margin_top">30dp</dimen>
+    <!-- Search Part -->
+    <dimen name="search_search_icon_size">28dp</dimen>
+    <dimen name="search_edittext_height">40dp</dimen>
+    <dimen name="search_search_icon_left">10dp</dimen>
+</resources>
