@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity">
+    tools:context=".view.SignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,6 +42,7 @@
                 style="@style/sign_in_up_edittext_style"
                 android:layout_marginTop="@dimen/sign_up_edittext_margin_top_2"
                 android:hint="@string/sign_up_enter_password_hint"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sign_up_edittext_username" />
@@ -56,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/sign_up_edittext_password" />
 
             <Button
-                android:id="@+id/sign_up_button"
+                android:id="@+id/sign_up_sign_up_button"
                 style="@style/sign_in_up_button_style"
                 android:layout_marginTop="@dimen/sing_up_sing_up_margin_top"
                 android:hint="@string/sign_up_button_value"

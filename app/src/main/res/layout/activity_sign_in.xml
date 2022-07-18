@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity">
+    tools:context=".view.SignInActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,12 +42,13 @@
                 style="@style/sign_in_up_edittext_style"
                 android:layout_marginTop="@dimen/sing_in_edittext_margin_top"
                 android:hint="@string/sign_in_enter_password_hint"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sign_in_edittext_username" />
 
             <Button
-                android:id="@+id/sign_in_button"
+                android:id="@+id/sign_in_sign_in_button"
                 style="@style/sign_in_up_button_style"
                 android:layout_marginTop="@dimen/sing_in_sing_in_margin_top"
                 android:hint="@string/sign_in_sign_in_button_value"
@@ -60,12 +61,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_in_not_registered_string"
-                app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
+                app:layout_constraintBottom_toTopOf="@+id/sign_in_sign_up_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/sign_up_button"
+                android:id="@+id/sign_in_sign_up_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/sing_in_sing_up_margin_bottom"
