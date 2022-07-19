@@ -3,6 +3,6 @@
     <item
         android:width="@dimen/search_search_icon_size"
         android:height="@dimen/search_search_icon_size"
-        android:drawable="@mipmap/ic_launcher_search"
+        android:drawable="@drawable/ic_baseline_search_48"
         android:left="@dimen/search_search_icon_left" />
 </layer-list>
