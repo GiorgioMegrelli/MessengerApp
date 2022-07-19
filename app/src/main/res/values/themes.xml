@@ -31,4 +31,11 @@
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">@dimen/sign_in_up_button_font_size</item>
     </style>
+
+    <style name="sign_in_up_button_white_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

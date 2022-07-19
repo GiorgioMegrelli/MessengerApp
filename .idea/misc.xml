@@ -4,6 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/drawable/background.xml" value="0.1335" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/drawable/edit_text_border.xml" value="0.1335" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/drawable/edit_text_border_2.xml" value="0.1335" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1335" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/drawable/search_icon_wrapper.xml" value="0.1335" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/drawable/sign_up_white.xml" value="0.1335" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/layout/activity_search.xml" value="0.536" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/layout/activity_sign_in.xml" value="0.264" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/layout/activity_sign_up.xml" value="0.4" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Desktop/FreeUni/android/project/MessengerApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1335" />
       </map>
     </option>
   </component>

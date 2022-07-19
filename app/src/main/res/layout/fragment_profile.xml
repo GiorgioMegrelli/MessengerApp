@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".view.SignInActivity">
+    tools:context=".view.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:layout_width="@dimen/avatar_image_dimen"
                 android:layout_height="@dimen/avatar_image_dimen"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/sign_in_avatar_margin_top"
+                android:layout_marginTop="@dimen/profile_avatar_margin_top"
                 android:contentDescription="@string/cd_avatar_image"
                 android:src="@drawable/avatar_image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -29,50 +29,47 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/sign_in_edittext_username"
+                android:id="@+id/profile_edittext_username"
                 style="@style/sign_in_up_edittext_style"
-                android:layout_marginTop="@dimen/sing_in_edittext_margin_top"
-                android:hint="@string/sign_in_enter_nickname_hint"
+                android:layout_marginTop="@dimen/profile_edittext_margin_top_1"
+                android:hint="@string/profile_enter_nickname_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <EditText
-                android:id="@+id/sign_in_edittext_password"
+                android:id="@+id/profile_edittext_what_i_do"
                 style="@style/sign_in_up_edittext_style"
-                android:layout_marginTop="@dimen/sing_in_edittext_margin_top"
-                android:hint="@string/sign_in_enter_password_hint"
-                android:inputType="textPassword"
+                android:layout_marginTop="@dimen/profile_edittext_margin_top_2"
+                android:hint="@string/profile_what_i_do_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sign_in_edittext_username" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_edittext_username" />
 
             <Button
-                android:id="@+id/sign_in_sign_in_button"
+                android:id="@+id/profile_update_button"
                 style="@style/sign_in_up_button_style"
-                android:layout_marginTop="@dimen/sing_in_sing_in_margin_top"
-                android:hint="@string/sign_in_sign_in_button_value"
+                android:layout_marginTop="@dimen/sing_up_sing_up_margin_top"
+                android:hint="@string/profile_update_button_value"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sign_in_edittext_password" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_in_not_registered_string"
-                app:layout_constraintBottom_toTopOf="@+id/sign_in_sign_up_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_edittext_what_i_do" />
 
             <Button
-                android:id="@+id/sign_in_sign_up_button"
+                android:id="@+id/profile_sign_out_button"
                 style="@style/sign_in_up_button_white_style"
-                android:layout_marginBottom="@dimen/sing_in_sing_up_margin_bottom"
-                android:text="@string/sign_in_sign_up_button_value"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/profile_edittext_margin_top_3"
+                android:hint="@string/profile_sign_out_button_value"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_update_button" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_edittext_margin_bottom_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_sign_out_button" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

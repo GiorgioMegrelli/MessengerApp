@@ -18,8 +18,19 @@
     <dimen name="sign_up_edittext_margin_top_2">15dp</dimen>
     <dimen name="sign_up_edittext_margin_top_3">20dp</dimen>
     <dimen name="sing_up_sing_up_margin_top">30dp</dimen>
-    <!-- Search Part -->
+    <!-- Main Page -->
+    <dimen name="main_toolbar_height">60dp</dimen>
+    <!-- Profile Page -->
+    <dimen name="profile_avatar_margin_top">65dp</dimen>
+    <dimen name="profile_edittext_margin_top_1">25dp</dimen>
+    <dimen name="profile_edittext_margin_top_2">20dp</dimen>
+    <dimen name="profile_edittext_margin_top_3">5dp</dimen>
+    <dimen name="profile_edittext_margin_bottom_1">40dp</dimen>
+    <!-- Search Page -->
     <dimen name="search_search_icon_size">28dp</dimen>
     <dimen name="search_edittext_height">40dp</dimen>
     <dimen name="search_search_icon_left">10dp</dimen>
+    <dimen name="search_back_icon_margin_start">15dp</dimen>
+    <dimen name="search_edittext_margin_start">10dp</dimen>
+    <dimen name="search_edittext_margin_end">15dp</dimen>
 </resources>

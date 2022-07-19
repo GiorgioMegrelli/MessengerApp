@@ -1,11 +1,12 @@
 package ge.gmegrelishvili.messengerapp.view
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import ge.gmegrelishvili.messengerapp.R
-import ge.gmegrelishvili.messengerapp.model.repository.FirebaseAuthRepository
+import ge.gmegrelishvili.messengerapp.view.main.MainActivityPagerAdapter
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -16,17 +17,29 @@ class MainActivity : AppCompatActivity() {
         ).get(MessengerAppViewModel::class.java)
     }
 
+    private lateinit var pagerAdapter: ViewPager2
+    private lateinit var navigationView: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Small example
-        val authRepository = FirebaseAuthRepository()
-        val textView = findViewById<TextView>(R.id.test_id)
-        textView.text = authRepository.getCurrentUid().toString()
-        textView.setOnClickListener {
-            viewModel.signOut()
-            finish()
+        pagerAdapter = findViewById(R.id.main_activity_view_pager)
+        pagerAdapter.adapter = MainActivityPagerAdapter(this)
+
+        navigationView = findViewById(R.id.main_bottom_navigation_view)
+        navigationView.setOnItemSelectedListener { item ->
+            pagerAdapter.currentItem = when (item.itemId) {
+                R.id.main_home_page -> HomePage
+                R.id.main_profile_page -> ProfilePage
+                else -> HomePage
+            }
+            true
         }
+    }
+
+    companion object {
+        const val HomePage = 0
+        const val ProfilePage = 1
     }
 
 }
