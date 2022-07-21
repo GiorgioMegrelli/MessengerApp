@@ -41,6 +41,13 @@ class FirebaseUserRepository : UserRepository {
         })
     }
 
+    override fun updateUser(
+        key: String,
+        user: User,
+        updateUserResult: UserRepository.Companion.UpdateUserResult
+    ) {
+    }
+
     override fun getUsersByName(
         username: String,
         getUsersByNameResult: UserRepository.Companion.GetUsersByNameResult

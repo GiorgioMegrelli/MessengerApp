@@ -8,6 +8,8 @@ interface UserRepository {
 
     fun getUser(key: String, getUserResult: GetUserResult)
 
+    fun updateUser(key: String, user: User, updateUserResult: UpdateUserResult)
+
     fun getUsersByName(username: String, getUsersByNameResult: GetUsersByNameResult)
 
     companion object {
@@ -17,6 +19,10 @@ interface UserRepository {
 
         interface GetUserResult {
             fun <T> getUserFinished(user: User?, error: T?)
+        }
+
+        interface UpdateUserResult {
+            fun <T> updateUserFinished(error: T?)
         }
 
         interface GetUsersByNameResult {

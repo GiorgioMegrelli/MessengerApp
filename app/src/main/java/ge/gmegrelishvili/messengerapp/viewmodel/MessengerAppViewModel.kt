@@ -8,24 +8,35 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import ge.gmegrelishvili.messengerapp.model.entity.User
-import ge.gmegrelishvili.messengerapp.model.repository.AuthRepository
-import ge.gmegrelishvili.messengerapp.model.repository.FirebaseAuthRepository
-import ge.gmegrelishvili.messengerapp.model.repository.FirebaseUserRepository
-import ge.gmegrelishvili.messengerapp.model.repository.UserRepository
+import ge.gmegrelishvili.messengerapp.model.repository.*
 
 class MessengerAppViewModel(
     private val userRepository: UserRepository,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val messageRepository: MessageRepository
 ) : ViewModel() {
-
-    /*
-    * Default User:
-    *   Username:   test
-    *   Password:   testtest
-    * */
 
     fun isSignedIn(): Boolean {
         return authRepository.getCurrentUid() != null
+    }
+
+    fun getCurrentUid(): String {
+        return authRepository.getCurrentUid()!!
+    }
+
+    fun getUser(key: String, callback: (User?) -> Unit) {
+        userRepository.getUser(key, object : UserRepository.Companion.GetUserResult {
+            override fun <T> getUserFinished(user: User?, error: T?) {
+                callback(user)
+            }
+        })
+    }
+
+    fun getUser(callback: (User?) -> Unit) {
+        if (authRepository.getCurrentUid() == null) {
+            callback(null)
+        }
+        getUser(authRepository.getCurrentUid()!!, callback)
     }
 
     fun signIn(username: String, password: String, callback: (Exception?) -> Unit) {
@@ -65,8 +76,8 @@ class MessengerAppViewModel(
         val authRepoHandler = object : AuthRepository.Companion.CreateUserResult {
             override fun <T> createUserFinished(key: String?, error: T?) {
                 if (error == null) {
-                    val user = User(username, password, whatIDo)
                     if (key != null) {
+                        val user = User(username, password, whatIDo)
                         userRepository.insertUser(key, user, userRepoHandler)
                     }
                     return
@@ -82,6 +93,8 @@ class MessengerAppViewModel(
         }
         authRepository.createUser(username, password, authRepoHandler)
     }
+
+    fun updateUser(key: String, user: User) {}
 
     fun signOut() {
         authRepository.signOut()
@@ -102,8 +115,12 @@ class MessengerAppViewModel(
                 if (modelClass.isAssignableFrom(MessengerAppViewModel::class.java)) {
                     val userRepository = FirebaseUserRepository()
                     val authRepository = FirebaseAuthRepository()
-                    val viewModel = MessengerAppViewModel(userRepository, authRepository)
-                    return viewModel as T
+                    val messageRepository = FirebaseMessageRepository()
+                    return MessengerAppViewModel(
+                        userRepository,
+                        authRepository,
+                        messageRepository
+                    ) as T
                 }
                 throw IllegalStateException(ViewModelExceptionString)
             }
