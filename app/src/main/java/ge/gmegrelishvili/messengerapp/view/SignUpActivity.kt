@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import ge.gmegrelishvili.messengerapp.R
+import ge.gmegrelishvili.messengerapp.view.errors.ViewError
 
 class SignUpActivity : SigningActivity() {
+
+    private val toast = ToastWrapper(this)
 
     private lateinit var whatIDoEdittext: EditText
 
@@ -24,19 +27,20 @@ class SignUpActivity : SigningActivity() {
             val username = usernameEdittext.text.toString().trim()
             val password = passwordEdittext.text.toString().trim()
             val whatIDo = whatIDoEdittext.text.toString().trim()
-            if (username.isEmpty()) {
-                toast.short(ViewErrorUsername)
-            } else if (password.isEmpty()) {
-                toast.short(ViewErrorPassword)
-            } else if (whatIDo.isEmpty()) {
-                toast.short(ViewErrorWhatIDo)
-            } else {
-                viewModel.createUser(username, password, whatIDo) { error ->
-                    if (error?.message != null) {
-                        toast.short(error.message!!)
-                    } else {
-                        signIn()
-                    }
+            if (toast.shortIf(ViewError.EmptyUsername, username.isEmpty())) {
+                return@setOnClickListener
+            }
+            if (toast.shortIf(ViewError.EmptyPassword, password.isEmpty())) {
+                return@setOnClickListener
+            }
+            if (toast.shortIf(ViewError.EmptyWhatIDo, whatIDo.isEmpty())) {
+                return@setOnClickListener
+            }
+            viewModel.createUser(username, password, whatIDo) { error ->
+                if (error?.message != null) {
+                    toast.short(error.message!!)
+                } else {
+                    signIn()
                 }
             }
         }

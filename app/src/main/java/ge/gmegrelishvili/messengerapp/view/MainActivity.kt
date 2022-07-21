@@ -2,20 +2,12 @@ package ge.gmegrelishvili.messengerapp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.view.main.MainActivityPagerAdapter
-import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
 
 class MainActivity : AppCompatActivity() {
-
-    private val viewModel: MessengerAppViewModel by lazy {
-        ViewModelProvider(
-            this, MessengerAppViewModel.Companion.MessengerAppViewModelFactory(this)
-        ).get(MessengerAppViewModel::class.java)
-    }
 
     private lateinit var pagerAdapter: ViewPager2
     private lateinit var navigationView: BottomNavigationView

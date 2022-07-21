@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import ge.gmegrelishvili.messengerapp.R
+import ge.gmegrelishvili.messengerapp.view.errors.ViewError
 
 
 class SignInActivity : SigningActivity() {
+
+    private val toast = ToastWrapper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,17 +32,18 @@ class SignInActivity : SigningActivity() {
         findViewById<Button>(R.id.sign_in_sign_in_button).setOnClickListener {
             val username = usernameEdittext.text.toString().trim()
             val password = passwordEdittext.text.toString().trim()
-            if (username.isEmpty()) {
-                toast.short(ViewErrorUsername)
-            } else if (password.isEmpty()) {
-                toast.short(ViewErrorPassword)
-            } else {
-                viewModel.signIn(username, password) { error ->
-                    if (error?.message != null) {
-                        toast.short(error.message!!)
-                    } else {
-                        signIn()
-                    }
+            ViewError.EmptyUsername
+            if (toast.shortIf(ViewError.EmptyUsername, username.isEmpty())) {
+                return@setOnClickListener
+            }
+            if (toast.shortIf(ViewError.EmptyPassword, password.isEmpty())) {
+                return@setOnClickListener
+            }
+            viewModel.signIn(username, password) { error ->
+                if (error?.message != null) {
+                    toast.short(error.message!!)
+                } else {
+                    signIn()
                 }
             }
         }
