@@ -26,4 +26,9 @@
     <string name="chat_message_input_hint">Message</string>
     <!-- Search Page -->
     <string name="search_edittext_hint">Search</string>
+    <!-- Chat item -->
+    <string name="chat_name">Mariam Mantskava</string>
+    <string name="last_message_time">13:52</string>
+    <string name="last_message_text">Hi! davwerot didi teqsti rom vnaxot ramdenad normalurad dajdeba iiiiq</string>
+    <string name="search">Search</string>
 </resources>
