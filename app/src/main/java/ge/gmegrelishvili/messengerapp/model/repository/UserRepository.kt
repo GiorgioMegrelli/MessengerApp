@@ -1,6 +1,7 @@
 package ge.gmegrelishvili.messengerapp.model.repository
 
 import ge.gmegrelishvili.messengerapp.model.entity.User
+import ge.gmegrelishvili.messengerapp.model.entity.UserUpdate
 
 interface UserRepository {
 
@@ -8,7 +9,7 @@ interface UserRepository {
 
     fun getUser(key: String, getUserResult: GetUserResult)
 
-    fun updateUser(key: String, user: User, updateUserResult: UpdateUserResult)
+    fun updateUser(key: String, user: UserUpdate, updateUserResult: UpdateUserResult)
 
     fun getUsersByName(username: String, getUsersByNameResult: GetUsersByNameResult)
 

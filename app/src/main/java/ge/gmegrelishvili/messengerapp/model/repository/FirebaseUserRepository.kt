@@ -7,6 +7,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import ge.gmegrelishvili.messengerapp.model.entity.User
+import ge.gmegrelishvili.messengerapp.model.entity.UserUpdate
 
 class FirebaseUserRepository : UserRepository {
 
@@ -19,11 +20,9 @@ class FirebaseUserRepository : UserRepository {
     ) {
         val usersRef = database.getReference(ReferenceName)
         usersRef.child(key).updateChildren(user.toMap()).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                insertUserResult.insertUserFinished(null)
-            } else {
-                insertUserResult.insertUserFinished(task.exception)
-            }
+            insertUserResult.insertUserFinished(
+                if (task.isSuccessful) null else task.exception
+            )
         }
     }
 
@@ -43,9 +42,15 @@ class FirebaseUserRepository : UserRepository {
 
     override fun updateUser(
         key: String,
-        user: User,
+        user: UserUpdate,
         updateUserResult: UserRepository.Companion.UpdateUserResult
     ) {
+        val usersRef = database.getReference(ReferenceName)
+        usersRef.child(key).updateChildren(user.toMap()).addOnCompleteListener { task ->
+            updateUserResult.updateUserFinished(
+                if (task.isSuccessful) null else task.exception
+            )
+        }
     }
 
     override fun getUsersByName(

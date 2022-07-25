@@ -2,6 +2,7 @@ package ge.gmegrelishvili.messengerapp.view.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.model.entity.User
+import ge.gmegrelishvili.messengerapp.model.entity.UserUpdate
 import ge.gmegrelishvili.messengerapp.view.ToastWrapper
 import ge.gmegrelishvili.messengerapp.view.errors.ViewError
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
@@ -24,6 +26,9 @@ class ProfileFragment(
 
     private val toast = ToastWrapper(fragmentActivity)
     private lateinit var currentUser: User
+
+    private lateinit var usernameEdittext: EditText
+    private lateinit var whatIDoEdittext: EditText
 
     private val viewModel: MessengerAppViewModel by lazy {
         ViewModelProvider(
@@ -37,6 +42,11 @@ class ProfileFragment(
         savedInstanceState: Bundle?
     ): View? {
         val createdView = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        usernameEdittext = createdView.findViewById(R.id.profile_edittext_username)
+        whatIDoEdittext = createdView.findViewById(R.id.profile_edittext_what_i_do)
+
+        usernameEdittext.inputType = InputType.TYPE_NULL
 
         viewModel.getUser { user ->
             if (user == null) {
@@ -52,9 +62,6 @@ class ProfileFragment(
     }
 
     private fun drawUi(createdView: View, user: User) {
-        val usernameEdittext = createdView.findViewById<EditText>(R.id.profile_edittext_username)
-        val whatIDoEdittext = createdView.findViewById<EditText>(R.id.profile_edittext_what_i_do)
-
         usernameEdittext.setText(user.username)
         whatIDoEdittext.setText(user.whatIDo)
 
@@ -69,15 +76,24 @@ class ProfileFragment(
         }
 
         createdView.findViewById<Button>(R.id.profile_update_button).setOnClickListener {
-            val username = usernameEdittext.text.toString().trim()
             val whatIDo = whatIDoEdittext.text.toString().trim()
-            if (toast.shortIf(ViewError.EmptyUsername, username.isEmpty())) {
-                return@setOnClickListener
-            }
             if (toast.shortIf(ViewError.EmptyWhatIDo, whatIDo.isEmpty())) {
                 return@setOnClickListener
             }
+            val key = viewModel.getCurrentUid()
+            val userUpdated = UserUpdate(whatIDo)
+            viewModel.updateUser(key, userUpdated) { error ->
+                if (error == null) {
+                    toast.short(UpdateSuccess)
+                } else {
+                    toast.short(it.toString())
+                }
+            }
         }
+    }
+
+    companion object {
+        private const val UpdateSuccess = "Profile Updated"
     }
 
 }

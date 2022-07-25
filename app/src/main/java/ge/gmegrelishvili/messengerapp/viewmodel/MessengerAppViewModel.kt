@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import ge.gmegrelishvili.messengerapp.model.entity.User
+import ge.gmegrelishvili.messengerapp.model.entity.UserUpdate
 import ge.gmegrelishvili.messengerapp.model.repository.*
 
 class MessengerAppViewModel(
@@ -77,7 +78,7 @@ class MessengerAppViewModel(
             override fun <T> createUserFinished(key: String?, error: T?) {
                 if (error == null) {
                     if (key != null) {
-                        val user = User(username, password, whatIDo)
+                        val user = User(username, whatIDo)
                         userRepository.insertUser(key, user, userRepoHandler)
                     }
                     return
@@ -94,7 +95,21 @@ class MessengerAppViewModel(
         authRepository.createUser(username, password, authRepoHandler)
     }
 
-    fun updateUser(key: String, user: User) {}
+    fun updateUser(
+        key: String,
+        user: UserUpdate,
+        callback: (Exception?) -> Unit
+    ) {
+        userRepository.updateUser(key, user, object : UserRepository.Companion.UpdateUserResult {
+            override fun <T> updateUserFinished(error: T?) {
+                if (error == null) {
+                    callback(null)
+                } else {
+                    callback(Exception(UnknownExceptionString))
+                }
+            }
+        })
+    }
 
     fun signOut() {
         authRepository.signOut()
