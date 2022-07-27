@@ -9,15 +9,17 @@
     <dimen name="sign_in_up_button_font_size">18sp</dimen>
     <!-- Sign In Page -->
     <dimen name="sign_in_avatar_margin_top">80dp</dimen>
-    <dimen name="sing_in_sing_up_margin_bottom">20dp</dimen>
-    <dimen name="sing_in_edittext_margin_top">15dp</dimen>
-    <dimen name="sing_in_sing_in_margin_top">30dp</dimen>
+    <dimen name="sign_in_edittext_margin_top">15dp</dimen>
+    <dimen name="sign_in_sign_in_margin_top">30dp</dimen>
+    <dimen name="sign_in_text_view_margin_top">25dp</dimen>
+    <dimen name="sign_in_bottom_space_height">20dp</dimen>
     <!-- Sign Up Page -->
     <dimen name="sign_up_avatar_margin_top">70dp</dimen>
     <dimen name="sign_up_edittext_margin_top_1">30dp</dimen>
     <dimen name="sign_up_edittext_margin_top_2">15dp</dimen>
     <dimen name="sign_up_edittext_margin_top_3">20dp</dimen>
-    <dimen name="sing_up_sing_up_margin_top">30dp</dimen>
+    <dimen name="sign_up_sign_up_margin_top">30dp</dimen>
+    <dimen name="sign_up_bottom_space_height">20dp</dimen>
     <!-- Main Page -->
     <dimen name="main_toolbar_height">60dp</dimen>
     <!-- Profile Page -->

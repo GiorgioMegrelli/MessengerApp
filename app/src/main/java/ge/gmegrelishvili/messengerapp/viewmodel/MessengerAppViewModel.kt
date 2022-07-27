@@ -1,8 +1,10 @@
 package ge.gmegrelishvili.messengerapp.viewmodel
 
-import android.app.Activity
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -14,6 +16,7 @@ import ge.gmegrelishvili.messengerapp.model.repository.*
 class MessengerAppViewModel(
     private val userRepository: UserRepository,
     private val authRepository: AuthRepository,
+    private val imageRepository: ImageRepository,
     private val messageRepository: MessageRepository
 ) : ViewModel() {
 
@@ -78,7 +81,7 @@ class MessengerAppViewModel(
             override fun <T> createUserFinished(key: String?, error: T?) {
                 if (error == null) {
                     if (key != null) {
-                        val user = User(username, whatIDo)
+                        val user = User(key, username, whatIDo)
                         userRepository.insertUser(key, user, userRepoHandler)
                     }
                     return
@@ -115,6 +118,53 @@ class MessengerAppViewModel(
         authRepository.signOut()
     }
 
+    fun searchUsers(
+        subUsername: String,
+        callback: (List<User>?, Exception?) -> Unit
+    ) {
+        userRepository.getUsersByName(
+            subUsername,
+            object : UserRepository.Companion.GetUsersByNameResult {
+                override fun <T> getUsersByNameFinished(users: List<User>?, error: T?) {
+                    if (error == null) {
+                        callback(users, null)
+                    } else {
+                        callback(null, Exception(UnknownExceptionString))
+                    }
+                }
+            })
+    }
+
+    fun uploadImage(
+        key: String,
+        uri: Uri,
+        callback: (Exception?) -> Unit
+    ) {
+        imageRepository.uploadImage(key, uri, object : ImageRepository.Companion.UploadImageResult {
+            override fun <T> uploadImageFinished(error: T?) {
+                if (error == null) {
+                    callback(null)
+                } else {
+                    callback(Exception(UnknownExceptionString))
+                }
+            }
+        })
+    }
+
+    fun downloadImage(
+        key: String, callback: (Bitmap?, Exception?) -> Unit
+    ) {
+        imageRepository.downloadImage(key, object : ImageRepository.Companion.DownloadImageResult {
+            override fun <T> downloadImageFinished(bitmap: Bitmap?, error: T?) {
+                if (error == null) {
+                    callback(bitmap, null)
+                } else {
+                    callback(null, Exception(UnknownExceptionString))
+                }
+            }
+        })
+    }
+
     companion object {
         private const val ViewModelExceptionString = "Illegal ViewModel"
 
@@ -124,16 +174,26 @@ class MessengerAppViewModel(
         private const val WeakPasswordExceptionString = "Weak Password"
         private const val TakenUsernameExceptionString = "Username is Taken"
 
-        class MessengerAppViewModelFactory(private val activity: Activity) :
+        @JvmStatic
+        fun getViewModelProvider(owner: ViewModelStoreOwner): MessengerAppViewModel {
+            return ViewModelProvider(owner, MessengerAppViewModelFactory()).get(
+                MessengerAppViewModel::class.java
+            )
+        }
+
+        class MessengerAppViewModelFactory :
             ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 if (modelClass.isAssignableFrom(MessengerAppViewModel::class.java)) {
                     val userRepository = FirebaseUserRepository()
                     val authRepository = FirebaseAuthRepository()
+                    val imageRepository = FirebaseImageRepository()
                     val messageRepository = FirebaseMessageRepository()
+
                     return MessengerAppViewModel(
                         userRepository,
                         authRepository,
+                        imageRepository,
                         messageRepository
                     ) as T
                 }

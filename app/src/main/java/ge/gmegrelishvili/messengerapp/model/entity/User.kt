@@ -4,16 +4,16 @@ import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 data class User(
+    val key: String = "",
     val username: String = "",
     val whatIDo: String = "",
-    val profileImage: String? = null
 ) : SerializableToMap {
 
     override fun toMap(): Map<String, Any?> {
         return mapOf(
+            "key" to key,
             "username" to username,
             "whatIDo" to whatIDo,
-            "profileImage" to profileImage
         )
     }
 

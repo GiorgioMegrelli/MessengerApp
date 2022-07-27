@@ -9,9 +9,7 @@ import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
 abstract class SigningActivity : AppCompatActivity() {
 
     protected val viewModel: MessengerAppViewModel by lazy {
-        ViewModelProvider(
-            this, MessengerAppViewModel.Companion.MessengerAppViewModelFactory(this)
-        ).get(MessengerAppViewModel::class.java)
+        MessengerAppViewModel.getViewModelProvider(this)
     }
 
     protected lateinit var usernameEdittext: EditText

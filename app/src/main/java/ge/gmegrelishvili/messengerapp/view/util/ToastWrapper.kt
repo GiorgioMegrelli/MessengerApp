@@ -1,4 +1,4 @@
-package ge.gmegrelishvili.messengerapp.view
+package ge.gmegrelishvili.messengerapp.view.util
 
 import android.content.Context
 import android.widget.Toast

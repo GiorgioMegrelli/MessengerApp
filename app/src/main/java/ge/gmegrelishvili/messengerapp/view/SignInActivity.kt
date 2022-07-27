@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.view.errors.ViewError
+import ge.gmegrelishvili.messengerapp.view.util.ToastWrapper
 
 
 class SignInActivity : SigningActivity() {
