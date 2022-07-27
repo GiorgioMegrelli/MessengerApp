@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".view.MainActivity">
+    android:orientation="vertical"
+    tools:context=".view.SearchActivity">
 
     <LinearLayout
         android:id="@+id/relativeLayout"
@@ -39,25 +40,28 @@
             android:minHeight="48dp" />
     </LinearLayout>
 
+    <include
+        android:id="@+id/loader"
+        layout="@layout/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/search_message_box"
         android:layout_width="match_parent"
         android:layout_height="@dimen/search_message_box_height"
         android:gravity="center"
+        android:text="@string/search_message_no_result"
         android:textAlignment="center"
         android:textSize="@dimen/search_message_view_font_size"
         android:textStyle="italic"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/found_users"
+        android:id="@+id/search_found_users"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_message_box" />
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

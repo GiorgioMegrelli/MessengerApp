@@ -9,17 +9,23 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.view.search.SearchUserAdapter
+import ge.gmegrelishvili.messengerapp.view.util.ToastWrapper
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
 import java.util.*
 import kotlin.concurrent.schedule
 
 class SearchActivity : AppCompatActivity() {
 
+    private val toast = ToastWrapper(this)
+
     private lateinit var searchNameField: EditText
-    private lateinit var messageBoxView: TextView
+    private lateinit var loader: ConstraintLayout
+    private lateinit var content: RecyclerView
+    private lateinit var messageBox: TextView
 
     private lateinit var usersAdapter: SearchUserAdapter
 
@@ -34,52 +40,68 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         searchNameField = findViewById(R.id.search_name_field)
-        messageBoxView = findViewById(R.id.search_message_box)
+        loader = findViewById(R.id.loader)
+        content = findViewById(R.id.search_found_users)
+        messageBox = findViewById(R.id.search_message_box)
 
         usersAdapter = SearchUserAdapter(this)
 
         searchNameField.addTextChangedListener(TextChangeListener())
 
-        findViewById<RecyclerView>(R.id.found_users).adapter = usersAdapter
+        content.adapter = usersAdapter
 
         findViewById<ImageView>(R.id.search_back_button).setOnClickListener {
             finish()
         }
-
-        showMessage(WelcomeMessage)
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun findUsers(name: String) {
+        showLoader()
+        hideMessage()
         viewModel.searchUsers(name) { users, error ->
             usersAdapter.apply {
                 if (error == null) {
                     this.users.clear()
                     if (users!!.isEmpty()) {
-                        showMessage(NoResultMessage)
+                        showMessage()
                     } else {
                         this.users.addAll(users)
                     }
                     notifyDataSetChanged()
                 }
+                hideLoader()
             }
         }
     }
 
-    private fun showMessage(value: String?) {
-        if (value != null) {
-            messageBoxView.text = value
+    private fun showLoader() {
+        runOnUiThread {
+            loader.visibility = View.VISIBLE
+            content.visibility = View.GONE
         }
-        messageBoxView.visibility = View.VISIBLE
+    }
+
+    private fun hideLoader() {
+        runOnUiThread {
+            loader.visibility = View.GONE
+            content.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showMessage() {
+        runOnUiThread {
+            messageBox.visibility = View.VISIBLE
+        }
     }
 
     private fun hideMessage() {
-        messageBoxView.visibility = View.GONE
+        runOnUiThread {
+            messageBox.visibility = View.GONE
+        }
     }
 
     private inner class TextChangeListener : TextWatcher {
-
-        private var lastLength = 0
 
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
@@ -92,18 +114,15 @@ class SearchActivity : AppCompatActivity() {
             if (p0 != null) {
                 val value = p0.toString()
                 if (value.length >= MinChars) {
-                    hideMessage()
                     task = Timer().schedule(DelayTimeMillis) {
                         findUsers(value)
                     }
                 } else {
-                    if (value.length < lastLength) {
-                        hideMessage()
-                    } else {
-                        showMessage(InfoMessage)
+                    if (value.length == 1) {
+                        toast.short(InfoMessage)
                     }
+                    hideMessage()
                 }
-                lastLength = value.length
             }
         }
     }
@@ -112,9 +131,7 @@ class SearchActivity : AppCompatActivity() {
         private const val MinChars = 3
         private const val DelayTimeMillis = 300L
 
-        private const val WelcomeMessage = "Type to find users"
         private const val InfoMessage = "Min $MinChars letters to search"
-        private const val NoResultMessage = "No Result"
     }
 
 }

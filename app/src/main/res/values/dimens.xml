@@ -36,7 +36,7 @@
     <dimen name="search_edittext_margin_start">10dp</dimen>
     <dimen name="search_edittext_margin_end">15dp</dimen>
     <dimen name="search_message_view_font_size">20sp</dimen>
-    <dimen name="search_message_box_height">60dp</dimen>
+    <dimen name="search_message_box_height">50dp</dimen>
     <!-- Searched User View -->
     <dimen name="searched_user_view_height">120dp</dimen>
     <dimen name="searched_user_image_size">90dp</dimen>
@@ -45,4 +45,6 @@
     <dimen name="searched_user_text_field_margin_left">15dp</dimen>
     <dimen name="searched_user_username_font_size">28sp</dimen>
     <dimen name="searched_user_what_i_do_font_size">18sp</dimen>
+    <!-- Loader -->
+    <dimen name="loader_size">70dp</dimen>
 </resources>

@@ -161,6 +161,8 @@ class MessengerAppViewModel(
                     callback(bitmap, null)
                 } else if (error !is StorageException) {
                     callback(null, Exception(UnknownExceptionString))
+                } else {
+                    callback(null, NoException())
                 }
             }
         })

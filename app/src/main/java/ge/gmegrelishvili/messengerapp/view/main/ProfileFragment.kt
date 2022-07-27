@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ScrollView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import ge.gmegrelishvili.messengerapp.R
@@ -23,6 +25,7 @@ import ge.gmegrelishvili.messengerapp.view.errors.ViewError
 import ge.gmegrelishvili.messengerapp.view.util.ImageUtil
 import ge.gmegrelishvili.messengerapp.view.util.ToastWrapper
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
+import ge.gmegrelishvili.messengerapp.viewmodel.NoException
 
 
 class ProfileFragment(
@@ -35,6 +38,8 @@ class ProfileFragment(
     private lateinit var usernameEdittext: EditText
     private lateinit var whatIDoEdittext: EditText
     private lateinit var profileImage: ImageView
+    private lateinit var loader: ConstraintLayout
+    private lateinit var content: ScrollView
 
     private val launchSomeActivity =
         registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
@@ -83,6 +88,10 @@ class ProfileFragment(
         usernameEdittext = createdView.findViewById(R.id.profile_edittext_username)
         whatIDoEdittext = createdView.findViewById(R.id.profile_edittext_what_i_do)
         profileImage = createdView.findViewById(R.id.user_profile_image_holder)
+        loader = createdView.findViewById(R.id.loader)
+        content = createdView.findViewById(R.id.profile_content)
+
+        hideContent()
 
         usernameEdittext.inputType = InputType.TYPE_NULL
 
@@ -123,9 +132,14 @@ class ProfileFragment(
 
         viewModel.downloadImage(user.key) { bitmap, exception ->
             if (exception != null) {
-                toast.short(CantFindRemoteImageExceptionString)
+                if (exception is NoException) {
+                    showContent()
+                } else {
+                    toast.short(CantFindRemoteImageExceptionString)
+                }
             } else {
                 profileImage.setImageBitmap(ImageUtil.cropImageRounded(bitmap!!))
+                showContent()
             }
         }
 
@@ -144,6 +158,16 @@ class ProfileFragment(
                 }
             }
         }
+    }
+
+    private fun showContent() {
+        loader.visibility = View.GONE
+        content.visibility = View.VISIBLE
+    }
+
+    private fun hideContent() {
+        loader.visibility = View.VISIBLE
+        content.visibility = View.GONE
     }
 
     companion object {
