@@ -121,8 +121,6 @@ class ProfileFragment(
         usernameEdittext.setText(user.username)
         whatIDoEdittext.setText(user.whatIDo)
 
-        toast.long(LoadingImageString)
-
         viewModel.downloadImage(user.key) { bitmap, exception ->
             if (exception != null) {
                 toast.short(CantFindRemoteImageExceptionString)
@@ -156,7 +154,6 @@ class ProfileFragment(
         private const val CantUploadImageExceptionString = "Can't upload image to remote server"
         private const val CantFindRemoteImageExceptionString =
             "Can't find or load the image from remote server"
-        private const val LoadingImageString = "Loading image. It will finish soon"
         private const val ImageTooBigExceptionString = "Can't find or load the image"
     }
 

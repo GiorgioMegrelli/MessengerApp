@@ -1,9 +1,11 @@
 package ge.gmegrelishvili.messengerapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.view.main.MainActivityPagerAdapter
 
@@ -26,6 +28,10 @@ class MainActivity : AppCompatActivity() {
                 else -> HomePage
             }
             true
+        }
+
+        findViewById<FloatingActionButton>(R.id.search_user_fab).setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
         }
     }
 

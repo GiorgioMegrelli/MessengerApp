@@ -31,9 +31,13 @@ class FirebaseImageRepository : ImageRepository {
     ) {
         val reference = storage.getReference(ImagesReference)
         reference.child(key).getBytes(ImageMaxSize).addOnCompleteListener { task ->
-            val result = task.result
-            val bitmap = BitmapFactory.decodeByteArray(result, 0, result.size)
-            downloadImageResult.downloadImageFinished(bitmap, null)
+            if (task.isSuccessful) {
+                val result = task.result
+                val bitmap = BitmapFactory.decodeByteArray(result, 0, result.size)
+                downloadImageResult.downloadImageFinished(bitmap, null)
+            } else {
+                downloadImageResult.downloadImageFinished(null, task.exception)
+            }
         }
     }
 

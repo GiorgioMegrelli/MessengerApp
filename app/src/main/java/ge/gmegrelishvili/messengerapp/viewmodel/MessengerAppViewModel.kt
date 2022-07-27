@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.storage.StorageException
 import ge.gmegrelishvili.messengerapp.model.entity.User
 import ge.gmegrelishvili.messengerapp.model.entity.UserUpdate
 import ge.gmegrelishvili.messengerapp.model.repository.*
@@ -158,7 +159,7 @@ class MessengerAppViewModel(
             override fun <T> downloadImageFinished(bitmap: Bitmap?, error: T?) {
                 if (error == null) {
                     callback(bitmap, null)
-                } else {
+                } else if (error !is StorageException) {
                     callback(null, Exception(UnknownExceptionString))
                 }
             }
