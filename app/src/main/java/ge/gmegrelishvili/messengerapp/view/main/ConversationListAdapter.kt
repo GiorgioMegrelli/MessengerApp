@@ -38,7 +38,7 @@ class ConversationViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         conversationProfilePicView.setImageBitmap(conversationListItemModel.bitmap)
         conversationUserNameView.text = conversationListItemModel.conversationUserName
         lastMessageView.text = conversationListItemModel.lastMessage
-        timeAfterLastMessageView.text = conversationListItemModel.timeAfterLastMessage
+        timeAfterLastMessageView.text = conversationListItemModel.timeAfterLastMessage.toString()
 
         itemView.setOnClickListener {
             //gadasvla conversation-ze
