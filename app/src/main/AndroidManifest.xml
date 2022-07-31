@@ -21,6 +21,7 @@
         <activity android:name=".view.SignUpActivity" />
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.ConversationActivity" />
     </application>
 
 </manifest>

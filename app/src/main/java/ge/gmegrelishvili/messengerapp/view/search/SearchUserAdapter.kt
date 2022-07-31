@@ -1,5 +1,6 @@
 package ge.gmegrelishvili.messengerapp.view.search
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.model.entity.User
+import ge.gmegrelishvili.messengerapp.view.ConversationActivity
 import ge.gmegrelishvili.messengerapp.view.util.ImageUtil
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
 
@@ -33,6 +35,7 @@ class SearchUserAdapter(private val activity: AppCompatActivity) :
             }
             itemView.setOnClickListener {
                 // Start char with this user
+                activity.startActivity(Intent(itemView.context, ConversationActivity::class.java))
             }
         }
     }

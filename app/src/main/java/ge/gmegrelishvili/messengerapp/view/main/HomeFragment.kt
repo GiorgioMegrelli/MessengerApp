@@ -2,7 +2,6 @@ package ge.gmegrelishvili.messengerapp.view.main
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,18 +20,21 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import ge.gmegrelishvili.messengerapp.R
-import ge.gmegrelishvili.messengerapp.model.entity.*
-import ge.gmegrelishvili.messengerapp.view.util.ImageUtil
+import ge.gmegrelishvili.messengerapp.model.entity.Conversation
+import ge.gmegrelishvili.messengerapp.model.entity.ConversationListItemModel
+import ge.gmegrelishvili.messengerapp.model.entity.ConversationMap
+import ge.gmegrelishvili.messengerapp.model.entity.Message
+import ge.gmegrelishvili.messengerapp.view.ConversationActivity
 import ge.gmegrelishvili.messengerapp.view.util.ToastWrapper
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
-import ge.gmegrelishvili.messengerapp.viewmodel.NoException
 
 class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    var recylerViewAdapter = ConversationListAdapter(mutableListOf())
+    var recylerViewAdapter = ConversationListAdapter(mutableListOf(), fragmentActivity)
     private lateinit var searchEt : EditText
     private lateinit var auth: FirebaseAuth
     private val toast = ToastWrapper(fragmentActivity)
+    private val database = Firebase.database
 
     private val viewModel: MessengerAppViewModel by lazy {
         ViewModelProvider(
@@ -68,13 +70,13 @@ class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
         val messageList2 : MutableList<Message> = mutableListOf(message3)
         val conversation2 = Conversation(messageList2)
 
-        Firebase.database.getReference("userConversationsData")
+        database.getReference("userConversationsData")
                                             .child("iKo3NeGrUMc7bPW0gEgup5GuKLs2")
                                             .child("conversationMap")
                                             .child("0akBbDBCRHbEXgmR3cYF64LFBrY2")
                                             .setValue(conversation1)
 
-        Firebase.database.getReference("userConversationsData")
+        database.getReference("userConversationsData")
                                             .child("iKo3NeGrUMc7bPW0gEgup5GuKLs2")
                                             .child("conversationMap")
                                             .child("eyxXpU6AgnVtbiafnUmdgETmIas2")
@@ -82,7 +84,6 @@ class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
     }
 
     private fun addOnDataChangedListener() {
-        val database = Firebase.database
         auth = Firebase.auth
         auth.currentUser!!.displayName?.let {
             database.getReference("userConversationsData").child(
@@ -109,7 +110,6 @@ class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
     }
 
     private fun fetchConversations() {
-        val database = Firebase.database
         auth = Firebase.auth
         val ref =
             auth.currentUser!!.displayName?.let {
