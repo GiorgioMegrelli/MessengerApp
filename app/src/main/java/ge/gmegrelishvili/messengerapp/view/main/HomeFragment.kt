@@ -20,20 +20,16 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import ge.gmegrelishvili.messengerapp.R
-import ge.gmegrelishvili.messengerapp.model.entity.Conversation
-import ge.gmegrelishvili.messengerapp.model.entity.ConversationListItemModel
-import ge.gmegrelishvili.messengerapp.model.entity.ConversationMap
-import ge.gmegrelishvili.messengerapp.model.entity.Message
-import ge.gmegrelishvili.messengerapp.view.ConversationActivity
-import ge.gmegrelishvili.messengerapp.view.util.ToastWrapper
+import ge.gmegrelishvili.messengerapp.model.entity.*
 import ge.gmegrelishvili.messengerapp.viewmodel.MessengerAppViewModel
+import java.text.SimpleDateFormat
+import kotlin.collections.HashMap
 
 class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    var recylerViewAdapter = ConversationListAdapter(mutableListOf(), fragmentActivity)
+    var recyclerViewAdapter = ConversationListAdapter(mutableListOf(), fragmentActivity)
     private lateinit var searchEt : EditText
     private lateinit var auth: FirebaseAuth
-    private val toast = ToastWrapper(fragmentActivity)
     private val database = Firebase.database
 
     private val viewModel: MessengerAppViewModel by lazy {
@@ -50,9 +46,9 @@ class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
     ): View? {
         val createdView = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = createdView?.findViewById(R.id.conversationsRecyclerView)!!
-        recyclerView.adapter = recylerViewAdapter
+        recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        searchEt = createdView.findViewById(R.id.searchEditText)
+        searchEt = createdView.findViewById(R.id.search_text)
         //search-shi textis listener
         //addConversationsForOneUser()
         fetchConversations()
@@ -61,12 +57,12 @@ class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
     }
 
     private fun addConversationsForOneUser() {
-        val message1 = Message("iKo3NeGrUMc7bPW0gEgup5GuKLs2", "0akBbDBCRHbEXgmR3cYF64LFBrY2", "first message", 1658399732558)
-        val message2 = Message("iKo3NeGrUMc7bPW0gEgup5GuKLs2", "0akBbDBCRHbEXgmR3cYF64LFBrY2", "second message", 1658399734558)
+        val message1 = Message("iKo3NeGrUMc7bPW0gEgup5GuKLs2", "0akBbDBCRHbEXgmR3cYF64LFBrY2", "first message", "1658399732558")
+        val message2 = Message("iKo3NeGrUMc7bPW0gEgup5GuKLs2", "0akBbDBCRHbEXgmR3cYF64LFBrY2", "second message", "1658399734558")
         val messageList1 : MutableList<Message> = mutableListOf(message1, message2)
         val conversation1 = Conversation(messageList1)
 
-        val message3 = Message("iKo3NeGrUMc7bPW0gEgup5GuKLs2", "eyxXpU6AgnVtbiafnUmdgETmIas2", "third message", 1658399732558)
+        val message3 = Message("iKo3NeGrUMc7bPW0gEgup5GuKLs2", "eyxXpU6AgnVtbiafnUmdgETmIas2", "third message", "1658399732558")
         val messageList2 : MutableList<Message> = mutableListOf(message3)
         val conversation2 = Conversation(messageList2)
 
@@ -139,14 +135,37 @@ class HomeFragment(fragmentActivity: FragmentActivity) : Fragment() {
             val ref = Firebase.storage.reference.child("profileImages/${key}")
             ref.getBytes(Long.MAX_VALUE).addOnSuccessListener {
                 val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
-                val conversationListItem = ConversationListItemModel(key, lastMessage!!.value,
-                    lastMessage.timestamp, bitmap
-                )
-                conversationsList.add(conversationListItem)
-                recylerViewAdapter.list = conversationsList
-                recylerViewAdapter.notifyDataSetChanged()
+                viewModel.getUser(key) {user ->
+                    if(user != null){
+                        val conversationListItem = ConversationListItemModel(user.username, lastMessage!!.value,
+                            getTimeAfterLastMessage(lastMessage.timestamp), bitmap
+                        )
+                        conversationsList.add(conversationListItem)
+                        recyclerViewAdapter.list = conversationsList
+                        recyclerViewAdapter.notifyDataSetChanged()
+                    }
+                }
             }
         }
+    }
+
+    private fun getTimeAfterLastMessage(lastMessageTimestamp: String): String {
+        var timeAfterLastMessage = ""
+        val currentTimestamp = System.currentTimeMillis()
+        val diff = currentTimestamp - lastMessageTimestamp.toLong()
+        val seconds = diff / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        val days = hours / 24
+
+        if(hours < 1){
+            return "$timeAfterLastMessage$minutes min"
+        }
+        if(days < 1){
+            return "$timeAfterLastMessage$hours hour"
+        }
+        val sdf = SimpleDateFormat("d MMM")
+        return sdf.format(diff * 1000).toString()
     }
 
 

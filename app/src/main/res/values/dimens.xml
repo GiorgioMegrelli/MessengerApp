@@ -47,4 +47,30 @@
     <dimen name="searched_user_what_i_do_font_size">18sp</dimen>
     <!-- Loader -->
     <dimen name="loader_size">70dp</dimen>
+
+
+    <dimen name="height_conversation_header">150dp</dimen>
+    <dimen name="dim_conversation_back">30dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
+    <dimen name="dim_back_arrow">48dp</dimen>
+    <dimen name="height_conversation_info">80dp</dimen>
+    <dimen name="height_collapsed_conversation_header">100dp</dimen>
+    <dimen name="text_big">32sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="dim_conversation_profile_image">50dp</dimen>
+    <dimen name="height_message_input">70dp</dimen>
+    <dimen name="height_message_text">32dp</dimen>
+    <dimen name="height_search_header">100dp</dimen>
+    <dimen name="min_height_search_text">48dp</dimen>
+    <dimen name="dim_conv_list_item_image">60dp</dimen>
+    <dimen name="height_conv_list_item_text">200dp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="message_text_width">230dp</dimen>
+    <dimen name="margin_conversation_message">32dp</dimen>
+    <dimen name="width_conversation_message">320dp</dimen>
+    <dimen name="height_home_header">200dp</dimen>
+    <dimen name="circle_image_gradient_radius">8dp</dimen>
+    <dimen name="margin_large">40dp</dimen>
+    <dimen name="margin_big">30dp</dimen>
 </resources>

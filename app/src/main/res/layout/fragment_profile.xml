@@ -31,6 +31,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/profile_avatar_margin_top"
                 android:contentDescription="@string/cd_avatar_image"
+                android:foreground="@drawable/circle_image"
                 android:src="@drawable/avatar_image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

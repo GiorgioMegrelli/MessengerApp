@@ -5,7 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class User(
     val key: String = "",
-    val username: String = "",
+    var username: String = "",
     val whatIDo: String = "",
 ) : SerializableToMap {
 

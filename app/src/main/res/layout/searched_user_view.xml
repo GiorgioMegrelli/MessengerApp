@@ -12,9 +12,11 @@
         android:layout_height="@dimen/searched_user_image_size"
         android:layout_marginStart="@dimen/searched_user_image_margin_left"
         android:src="@drawable/avatar_image_placeholder"
+        android:foreground="@drawable/circle_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"

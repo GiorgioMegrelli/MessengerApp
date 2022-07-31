@@ -8,7 +8,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/height_home_header"
 
         android:fitsSystemWindows="true">
 
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:contentScrim="@color/purple_500"
+            app:contentScrim="@color/conversation_header"
             android:fitsSystemWindows="true">
 
 
@@ -35,18 +35,20 @@
                 android:layout_gravity="bottom"
                 app:layout_collapseMode="pin">
 
+
                 <EditText
-                    android:id="@+id/searchEditText"
+                    android:id="@+id/search_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/et_background"
+                    android:drawableStart="@drawable/search_icon_wrapper"
                     android:gravity="left"
                     android:hint="@string/search"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingTop="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_small" />
 
             </androidx.appcompat.widget.Toolbar>
 

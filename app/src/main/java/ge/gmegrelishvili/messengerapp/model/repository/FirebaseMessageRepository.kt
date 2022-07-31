@@ -40,7 +40,7 @@ class FirebaseMessageRepository(
         val mergedKeys = mergeKeys(fromUserId, toUserId)
         val childRef = database.getReference(ReferenceName).child(mergedKeys)
         childRef.push().key?.let { key ->
-            val message = Message(fromUserId, toUserId, value, timeStrategy.getTimeValue())
+            val message = Message(fromUserId, toUserId, value, timeStrategy.getTimeValue().toString())
             childRef.child(key).setValue(message)
             insertMessageResult.insertMessageFinished(message, null)
         }
@@ -62,7 +62,7 @@ class FirebaseMessageRepository(
                 }
                 val list = ArrayList(result.values.filterNotNull())
                 Comparator<Message> { m0, m1 ->
-                    (m0.timestamp - m1.timestamp).toInt()
+                    (m0.timestamp.toLong() - m1.timestamp.toLong()).toInt()
                 }.let { comp -> list.sortedWith(comp) }
                 getMessagesResult.getMessagesFinished(list.toList(), null)
             }

@@ -2,18 +2,15 @@ package ge.gmegrelishvili.messengerapp.view.main
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import ge.gmegrelishvili.messengerapp.R
 import ge.gmegrelishvili.messengerapp.model.entity.ConversationListItemModel
 import ge.gmegrelishvili.messengerapp.view.ConversationActivity
-import kotlin.math.log
 
 class ConversationListAdapter(var list: List<ConversationListItemModel>, private val avtivity: Activity):
     RecyclerView.Adapter<ConversationListAdapter.ConversationViewHolder>() {
@@ -39,6 +36,7 @@ class ConversationListAdapter(var list: List<ConversationListItemModel>, private
 
         fun initView(conversationListItemModel: ConversationListItemModel) {
 
+
             conversationProfilePicView.setImageBitmap(conversationListItemModel.bitmap)
             conversationUserNameView.text = conversationListItemModel.conversationUserName
             lastMessageView.text = conversationListItemModel.lastMessage
@@ -46,7 +44,6 @@ class ConversationListAdapter(var list: List<ConversationListItemModel>, private
             timeAfterLastMessageView.text = conversationListItemModel.timeAfterLastMessage.toString()
 
             itemView.setOnClickListener {
-                //gadasvla conversation-ze
                 avtivity.startActivity(
                     Intent(
                         itemView.context,

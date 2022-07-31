@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#F4F6FF" />
+    <solid android:color="@color/message_input" />
     <padding
-        android:bottom="10dp"
-        android:left="40dp"
-        android:right="40dp"
-        android:top="10dp" />
+        android:bottom="@dimen/margin_small"
+        android:left="@dimen/margin_large"
+        android:right="@dimen/margin_large"
+        android:top="@dimen/margin_small" />
     <corners android:radius="80dp"/>
 </shape>

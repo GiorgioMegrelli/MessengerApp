@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/height_search_header"
         android:background="@color/search_header_color"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
             android:background="@drawable/edit_text_border_2"
             android:drawableStart="@drawable/search_icon_wrapper"
             android:hint="@string/search_edittext_hint"
-            android:minHeight="48dp" />
+            android:minHeight="@dimen/min_height_search_text" />
     </LinearLayout>
 
     <include

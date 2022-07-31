@@ -4,7 +4,7 @@ data class Message(
     val fromUserId: String = EmptyId,
     val toUserId: String = EmptyId,
     val value: String = "",
-    val timestamp: Long = EmptyTimestamp
+    val timestamp: String = ""
 ) : SerializableToMap {
 
     override fun toMap(): Map<String, Any?> {
@@ -22,7 +22,7 @@ data class Message(
 
     companion object {
         const val EmptyId = ""
-        const val EmptyTimestamp = 0L
+        const val EmptyTimestamp = ""
     }
 
 }
