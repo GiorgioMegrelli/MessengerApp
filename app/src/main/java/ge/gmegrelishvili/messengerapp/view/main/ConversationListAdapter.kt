@@ -28,7 +28,7 @@ class ConversationListAdapter(var list: List<ConversationListItemModel>, private
         return list.size
     }
 
-    inner class ConversationViewHolder(itemView: View, private val avtivity: Activity): RecyclerView.ViewHolder(itemView){
+    inner class ConversationViewHolder(itemView: View, private val activity: Activity): RecyclerView.ViewHolder(itemView){
         val conversationProfilePicView = itemView.findViewById<ImageView>(R.id.conversationProfilePic)
         val conversationUserNameView = itemView.findViewById<TextView>(R.id.conversationUserName)
         val lastMessageView = itemView.findViewById<TextView>(R.id.lastMessage)
@@ -44,11 +44,11 @@ class ConversationListAdapter(var list: List<ConversationListItemModel>, private
             timeAfterLastMessageView.text = conversationListItemModel.timeAfterLastMessage.toString()
 
             itemView.setOnClickListener {
-                avtivity.startActivity(
+                activity.startActivity(
                     Intent(
                         itemView.context,
                         ConversationActivity::class.java
-                    )
+                    ).putExtra("username", conversationListItemModel.conversationUserName)
                 )
             }
 
