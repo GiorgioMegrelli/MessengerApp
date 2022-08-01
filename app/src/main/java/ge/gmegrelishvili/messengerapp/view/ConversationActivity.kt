@@ -33,18 +33,18 @@ class ConversationActivity : AppCompatActivity() {
 
     private fun fetchMessages() {
         val username = intent.extras!!.getString("username")
-        //TODO: userId maqvs amosagebi rogorme axla username momdis
-        var userId = "0akBbDBCRHbEXgmR3cYF64LFBrY2"
-//        viewModel.searchUsers(username!!){users, error ->
-//            if (error == null) {
-//                if (!users!!.isEmpty()) {
-//                     for (u in users){
-//                         if (u.username == username){
-//                             userId = u.key
-//                         }
-//                     }
-//                }
-//            }}
+        var userId = ""
+        viewModel.searchUsers(username!!){ list: List<User>?, exception: Exception? ->
+            if(exception == null){
+                if(!list!!.isEmpty()){
+                    for (user in list){
+                        if(user.username.equals(username)){
+                            userId = user.key
+                        }
+                    }
+                }
+            }
+        }
         val currentUserId = viewModel.getCurrentUid()
         auth = Firebase.auth
         val ref =
